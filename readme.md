@@ -5,7 +5,7 @@
 2 -> green, 15
 3 -> yellow, 2
 4 -> orange, 3
-5 -> red, 3
+5 -> red, 4
 
 
 # libraries
