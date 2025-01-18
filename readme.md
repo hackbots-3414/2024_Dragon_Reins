@@ -6,3 +6,8 @@
 3 -> yellow, 2
 4 -> orange, 3
 5 -> red, 3
+
+
+# libraries
+ micheal adams "button" library
+ the gamepad library in this repo
