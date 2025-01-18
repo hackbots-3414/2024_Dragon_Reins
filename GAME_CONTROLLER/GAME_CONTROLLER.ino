@@ -7,14 +7,14 @@ int deadbandRX = default_deadband;
 int deadbandRY = default_deadband;
 int deadbandLX = default_deadband;
 
-int rightXcenter = 500;
-int rightYcenter = 500;
-int leftXcenter = 500;
-int leftYcenter = 500;
-double multiplierRX = 0.254; //127 / 500
-double multiplierRY = 0.254;
-double multiplierLX = 0.254;
-double multiplierLY = 0.254;
+int rightXcenter = 512;
+int rightYcenter = 512;
+int leftXcenter = 512;
+int leftYcenter = 512;
+double multiplierRX = 127/rightXcenter; //127 / 500
+double multiplierRY = 127/rightYcenter;
+double multiplierLX = 127/leftXcenter;
+double multiplierLY = 127/leftYcenter;
 
 // Button button0(16);
 // Button button1(14);
@@ -59,14 +59,16 @@ void loop() {
   handle_buttons();
   int lx, ly, rx, ry;
   lx = analogRead(A0);
-  ly = analogRead(A1);
-  rx = analogRead(A2);
-  ry = analogRead(A3);
-  //we need to convert a 0-1000 to -127 - 127
+  ly = analogRead(A1);//-leftYcenter;
+  rx = analogRead(A2);//-rightXcenter;
+  ry = analogRead(A3);//-rightYcenter;
+  Serial.println(lx);
+  // we need to convert a 0-1000 to -127 - 127
   lx = floor((lx - leftXcenter) * multiplierLX);
   ly = floor((ly - leftYcenter) * multiplierLX);
   rx = floor((rx - rightXcenter) * multiplierRX);
   ry = floor((ry - rightYcenter) * multiplierRY);
+
   if(lx > 127) lx = 127;
   if(ly > 127) ly = 127;
   if(rx > 127) rx = 127;
