@@ -1,4 +1,5 @@
 #include <Gamepad.h>
+// #include <Button.h>
 #define default_deadband 5
 
 int deadbandLY = default_deadband;
@@ -15,9 +16,23 @@ double multiplierRY = 0.254;
 double multiplierLX = 0.254;
 double multiplierLY = 0.254;
 
+// Button button0(16);
+// Button button1(14);
+// Button button2(15);
+// Button button3(2);
+// Button button4(3);
+// Button button5(4);
+
+
 Gamepad gp;
 
 void setup() {
+  pinMode(16, INPUT_PULLUP);
+  pinMode(14, INPUT_PULLUP);
+  pinMode(15, INPUT_PULLUP);
+  pinMode(2, INPUT_PULLUP);
+  pinMode(3, INPUT_PULLUP);
+  pinMode(4, INPUT_PULLUP);
 
   pinMode(A0, INPUT);
   pinMode(A1, INPUT);
@@ -29,7 +44,19 @@ void setup() {
   calibrate();
 }
 
+void handle_buttons(){
+  gp.setButtonState(0, !digitalRead(16));
+  gp.setButtonState(1, !digitalRead(14));
+  gp.setButtonState(2, !digitalRead(15));
+  gp.setButtonState(3, !digitalRead(2));
+  gp.setButtonState(4, !digitalRead(3));
+  gp.setButtonState(5, !digitalRead(4));
+  // gp.setButtonState(8, !digitalRead(8));
+  // gp.setButtonState(9, !digitalRead(9));
+}
+
 void loop() {
+  handle_buttons();
   int lx, ly, rx, ry;
   lx = analogRead(A0);
   ly = analogRead(A1);
@@ -48,26 +75,11 @@ void loop() {
   if(ly < deadbandLY && ly > -deadbandLY) ly = 0;
   if(rx < deadbandRX && rx > -deadbandRX) rx = 0;
   if(ry < deadbandRY && ry > -deadbandRY) ry = 0;
-  gp.setLeftXaxis(lx);
-  gp.setRightXaxis(rx);
-  gp.setLeftYaxis(-ly);
-  gp.setRightYaxis(-ry);
-  
-  int X, Y;
-  X = digitalRead(8);
-  Y = digitalRead(9);
-  
-  if(X == LOW)
-    gp.setButtonState(8, true);
-  else
-    gp.setButtonState(8, false);
-
-  if(Y == LOW)
-    gp.setButtonState(9, true);
-  else
-    gp.setButtonState(9, false);
-
-  delay(20);
+  gp.setLeftXaxis(-lx);
+  gp.setRightXaxis(-rx);
+  gp.setLeftYaxis(ly);
+  gp.setRightYaxis(ry);
+  // delay(20);
 }
 
 void calibrate()
