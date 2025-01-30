@@ -24,7 +24,7 @@ int ids[3][3] = {
 
 void init_pins(){
   for (int i = 0; i < 3; i++) {
-    pinMode(cols[i], INPUT_PULLUP);
+    pinMode(cols[i], INPUT);
   }
   for (int i = 0; i < 3; i++) {
     pinMode(rows[i], INPUT);
