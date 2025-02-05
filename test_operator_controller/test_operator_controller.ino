@@ -7,9 +7,9 @@ int row_0 = 0;
 int row_1 = 1;
 int row_2 = 2;
 
-int col_0 = 18;
-int col_1 = 19;
-int col_2 = 20;
+int col_0 = 8;
+int col_1 = 9;
+int col_2 = 10;
 
 int pins[6] = {row_0, row_1, row_2, col_0, col_1, col_2};
 int rows[3] = {row_0, row_1, row_2};
@@ -24,7 +24,7 @@ int ids[3][3] = {
 
 void init_pins(){
   for (int i = 0; i < 3; i++) {
-    pinMode(cols[i], INPUT);
+    pinMode(cols[i], INPUT_PULLUP);
   }
   for (int i = 0; i < 3; i++) {
     pinMode(rows[i], INPUT);
