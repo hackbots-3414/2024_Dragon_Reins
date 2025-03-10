@@ -17,12 +17,12 @@
 ## Left Stick
 | Apem Joystick Pin | Apem Wire Color | Arduino Micro Pin |
 | ----------------- | --------------- | ----------------- |
-| 1 | Black | GND - Left Bottom |
+| 1 | Black | GND - Right |
 | 2 | Red | VCC |
 | 4 | Blue | A1 |
 | 6 | Yellow | A0 |
 | 9 | Orange | 9 |
-| 10 | White | GND - Left Top |
+| 10 | White | GND - Left Bottom |
 
 ## Right Stick
 | Apem Joystick Pin | Apem Wire Color | Arduino Micro Pin |
@@ -31,15 +31,15 @@
 | 2 | Red | VCC |
 | 4 | Blue | A3 |
 | 6 | Yellow | A2 |
-| 9 | Orange | 8 |
-| 10 | White | GND - Left Top |
+| 9 | Orange | 16 |
+| 10 | White | GND - Left Bottom |
 
 ## Trigger Switches
 | Arduino Pin | Button | Wire Color |
 | ----------- | ------ | ------- |
-| GND - Left Top | Left and Right common | White |
-| 6 | Left trigger | Green |
-| 7 | Right trigger | Green |
+| GND Left-Bottom | Left and Right common | White |
+| 5 | Left trigger | Green |
+| 4 | Right trigger | Green |
 
 
 
