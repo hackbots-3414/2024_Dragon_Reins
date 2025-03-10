@@ -39,7 +39,7 @@
 | ----------- | ------ | ------- |
 | GND Left-Bottom | Left and Right common | White |
 | 5 | Left trigger | Green |
-| 4 | Right trigger | Green |
+| 3 | Right trigger | Green |
 
 
 
