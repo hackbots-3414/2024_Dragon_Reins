@@ -21,7 +21,7 @@
 | 2 | Red | VCC |
 | 4 | Blue | A1 |
 | 6 | Yellow | A0 |
-| 9 | Orange | 9 |
+| 9 | Orange | 6 |
 | 10 | White | GND - Left Bottom |
 
 ## Right Stick
