@@ -7,10 +7,10 @@ int deadbandRX = default_deadband;
 int deadbandRY = default_deadband;
 int deadbandLX = default_deadband;
 
-int rightXcenter = 512;
-int rightYcenter = 512;
-int leftXcenter = 512;
-int leftYcenter = 512;
+double rightXcenter = 512;
+double rightYcenter = 512;
+double leftXcenter = 512;
+double leftYcenter = 512;
 double multiplierRX = 127/rightXcenter; //127 / 500
 double multiplierRY = 127/rightYcenter;
 double multiplierLX = 127/leftXcenter;
@@ -27,19 +27,19 @@ double multiplierLY = 127/leftYcenter;
 Gamepad gp;
 
 void setup() {
-  // pinMode(16, INPUT_PULLUP);
-  // pinMode(14, INPUT_PULLUP);
-  // pinMode(15, INPUT_PULLUP);
-  // pinMode(2, INPUT_PULLUP);
+  // pinMode(5, INPUT_PULLUP);
+  // pinMode(3, INPUT_PULLUP);
+  pinMode(6, INPUT_PULLUP); // left joystick button
+  pinMode(16, INPUT_PULLUP); //button right joystick
   // pinMode(3, INPUT_PULLUP);
   // pinMode(4, INPUT_PULLUP);
 
-  // pinMode(A0, INPUT);
-  // pinMode(A1, INPUT);
-  // pinMode(A2, INPUT);
-  // pinMode(A3, INPUT);
-  // pinMode(8,  INPUT); //Y
-  // pinMode(9,  INPUT); //X
+  pinMode(A0, INPUT);
+  pinMode(A1, INPUT);
+  pinMode(A2, INPUT);
+  pinMode(A3, INPUT);
+  pinMode(8,  INPUT); //Y
+  pinMode(9,  INPUT); //X
   
   // calibrate();
 
@@ -49,43 +49,50 @@ int state = 1;
 
 void handle_buttons(){
   state ++;
+  // gp.setButtonState(0, !digitalRead(3));
+  // gp.setButtonState(1, !digitalRead(5));
+  gp.setButtonState(1, !digitalRead(6)); //remapping to better match driver preference
   gp.setButtonState(0, !digitalRead(16));
-  gp.setButtonState(1, !digitalRead(14));
-  gp.setButtonState(2, !digitalRead(15));
-  gp.setButtonState(3, !digitalRead(2));
-  gp.setButtonState(4, !digitalRead(3));
-  gp.setButtonState(5, !digitalRead(4));
+  // gp.setButtonState(4, !digitalRead(3));
+  // gp.setButtonState(5, !digitalRead(4));
   // gp.setButtonState(8, !digitalRead(8));
   // gp.setButtonState(9, !digitalRead(9));
 }
 
 void loop() {
   handle_buttons();
-//   int lx, ly, rx, ry;
-//   lx = analogRead(A0);
-//   ly = analogRead(A1);//-leftYcenter;
-//   rx = analogRead(A2);//-rightXcenter;
-//   ry = analogRead(A3);//-rightYcenter;
-//   Serial.println(lx);
-//   // we need to convert a 0-1000 to -127 - 127
-//   lx = floor((lx - leftXcenter) * multiplierLX);
-//   ly = floor((ly - leftYcenter) * multiplierLX);
-//   rx = floor((rx - rightXcenter) * multiplierRX);
-//   ry = floor((ry - rightYcenter) * multiplierRY);
+  int lx, ly, rx, ry;
+  lx = analogRead(A1);
+  ly = analogRead(A0);//-leftYcenter;
+  rx = analogRead(A3);//-rightXcenter;
+  ry = analogRead(A2);//-rightYcenter;
+  // Serial.println(ly);
+  // we need to convert a 0-1000 to -127 - 127
+  
+  // Serial.println(multiplierLX);
+  lx = floor((lx - leftXcenter) * multiplierLX);
+  ly = floor((ly - leftYcenter) * multiplierLX);
+  rx = floor((rx - rightXcenter) * multiplierRX);
+  ry = floor((ry - rightYcenter) * multiplierRY);
 
-//   if(lx > 127) lx = 127;
-//   if(ly > 127) ly = 127;
-//   if(rx > 127) rx = 127;
-//   if(ry > 127) ry = 127;
-//   if(lx < deadbandLX && lx > -deadbandLX) lx = 0;
-//   if(ly < deadbandLY && ly > -deadbandLY) ly = 0;
-//   if(rx < deadbandRX && rx > -deadbandRX) rx = 0;
-//   if(ry < deadbandRY && ry > -deadbandRY) ry = 0;
-//   gp.setRightXaxis(-lx);
-//   gp.setLeftXaxis(-rx);
-//   gp.setRightYaxis(ly);
-//   gp.setLeftYaxis(ry);
-//   // delay(20);
+  // Serial.println(ly);
+  // Serial.println(rx);
+  // Serial.println(ry);
+
+  if(lx > 127) lx = 127;
+  if(ly > 127) ly = 127;
+  if(rx > 127) rx = 127;
+  if(ry > 127) ry = 127;
+  if(lx < deadbandLX && lx > -deadbandLX) lx = 0;
+  if(ly < deadbandLY && ly > -deadbandLY) ly = 0;
+  if(rx < deadbandRX && rx > -deadbandRX) rx = 0;
+  if(ry < deadbandRY && ry > -deadbandRY) ry = 0;
+
+  gp.setRightXaxis(-ry);
+  gp.setLeftXaxis(-ly);
+  gp.setRightYaxis(rx);
+  gp.setLeftYaxis(lx);
+  // delay(20);
 }
 
 // void calibrate()
