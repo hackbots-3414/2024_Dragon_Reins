@@ -88,9 +88,9 @@ void loop() {
   if(rx < deadbandRX && rx > -deadbandRX) rx = 0;
   if(ry < deadbandRY && ry > -deadbandRY) ry = 0;
 
-  gp.setRightXaxis(-ry);
+  gp.setRightXaxis(-rx);
   gp.setLeftXaxis(-ly);
-  gp.setRightYaxis(rx);
+  gp.setRightYaxis(ry);
   gp.setLeftYaxis(lx);
   // delay(20);
 }
