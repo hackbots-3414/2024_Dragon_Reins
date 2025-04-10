@@ -26,9 +26,9 @@ double multiplierLY = 127/leftYcenter;
 
 Gamepad gp;
 
-void setup() {
-  // pinMode(5, INPUT_PULLUP);
-  // pinMode(3, INPUT_PULLUP);
+void setup()  {
+  pinMode(5, INPUT_PULLUP); // Left Trigger
+  pinMode(3, INPUT_PULLUP); // Right Trigger
   pinMode(6, INPUT_PULLUP); // left joystick button
   pinMode(16, INPUT_PULLUP); //button right joystick
   // pinMode(3, INPUT_PULLUP);
@@ -47,10 +47,10 @@ void setup() {
 
 int state = 1;
 
-void handle_buttons(){
+void handle_buttons() {
   state ++;
-  // gp.setButtonState(0, !digitalRead(3));
-  // gp.setButtonState(1, !digitalRead(5));
+  gp.setButtonState(2, !digitalRead(3)); // Right Trigger
+  gp.setButtonState(3, !digitalRead(5)); //  Left Trigger
   gp.setButtonState(1, !digitalRead(6)); //remapping to better match driver preference
   gp.setButtonState(0, !digitalRead(16));
   // gp.setButtonState(4, !digitalRead(3));
