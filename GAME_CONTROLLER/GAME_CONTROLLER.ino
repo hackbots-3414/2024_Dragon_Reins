@@ -1,6 +1,6 @@
 #include <Gamepad.h>
 // #include <Button.h>
-#define default_deadband 2
+#define default_deadband 3
 
 int deadbandLY = default_deadband;
 int deadbandRX = default_deadband;
